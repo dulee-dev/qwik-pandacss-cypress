@@ -1,65 +1,45 @@
-# Qwik City App ⚡️
+# qwik style guide (pandacss + cypress)
 
-- [Qwik Docs](https://qwik.builder.io/)
-- [Discord](https://qwik.builder.io/chat)
-- [Qwik GitHub](https://github.com/BuilderIO/qwik)
-- [@QwikDev](https://twitter.com/QwikDev)
-- [Vite](https://vitejs.dev/)
+## object
 
----
+pandacss for style and can be tested in cypress
 
-## Project Structure
+<required>
 
-This project is using Qwik with [QwikCity](https://qwik.builder.io/qwikcity/overview/). QwikCity is just an extra set of tools on top of Qwik to make it easier to build a full site, including directory-based routing, layouts, and more.
+1. atomic css
 
-Inside your project, you'll see the following directory structure:
+2. supporting ts
 
-```
-├── public/
-│   └── ...
-└── src/
-    ├── components/
-    │   └── ...
-    └── routes/
-        └── ...
-```
+3. use design token only
 
-- `src/routes`: Provides the directory-based routing, which can include a hierarchy of `layout.tsx` layout files, and an `index.tsx` file as the page. Additionally, `index.ts` files are endpoints. Please see the [routing docs](https://qwik.builder.io/qwikcity/routing/overview/) for more info.
+4. class variant (like cva or recipe)
 
-- `src/components`: Recommended directory for components.
+5. official support
 
-- `public`: Any static assets, like images, can be placed in the public directory. Please see the [Vite public directory](https://vitejs.dev/guide/assets.html#the-public-directory) for more info.
+6. styles can be tested in cypress
 
-## Add Integrations and deployment
+## setup
 
-Use the `npm run qwik add` command to add additional integrations. Some examples of integrations includes: Cloudflare, Netlify or Express Server, and the [Static Site Generator (SSG)](https://qwik.builder.io/qwikcity/guides/static-site-generation/).
+1. setup pandacss
 
-```shell
-npm run qwik add # or `yarn qwik add`
-```
+npm run qwik add pandacss
 
-## Development
+2. setup cypress
 
-Development mode uses [Vite's development server](https://vitejs.dev/). The `dev` command will server-side render (SSR) the output during development.
+npm run qwik add cypress
 
-```shell
-npm start # or `yarn start`
-```
+3. set config in panda.config.ts
 
-> Note: during dev mode, Vite may request a significant number of `.js` files. This does not represent a Qwik production build.
+4. set tokens in ./styles/ and import to pandacss.config.ts>theme>tokens
 
-## Preview
+5. set recipe in ./src/styles/
 
-The preview command will create a production build of the client modules, a production build of `src/entry.preview.tsx`, and run a local server. The preview server is only for convenience to preview a production build locally and should not be used as a production server.
+6. reset styled-system with "panda codegen"
 
-```shell
-npm run preview # or `yarn preview`
-```
+7. for test import global.css in ./cypress/support/component.ts
 
-## Production
+8. add plugins to support older browser ('autoprefixer','@csstools/postcss-cascade-layers', ...)
 
-The production build will generate client and server modules by running both client and server build commands. The build command will use Typescript to run a type check on the source code.
+## trouble shooting
 
-```shell
-npm run build # or `yarn build`
-```
+change postcss.config.js -> postcss.config.cjs
